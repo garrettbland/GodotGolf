@@ -1,0 +1,85 @@
+[gd_scene load_steps=2 format=3 uid="uid://ew116wlvk5m1"]
+
+[sub_resource type="GDScript" id="GDScript_76uh8"]
+script/source = "extends Button
+
+@onready var scoreLabel: RichTextLabel = $RichTextLabel2
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	print(\"Ready...\")
+	#scoreLabel = get_node(\"Control/RichTextLabel2\")
+	#print(get_children())
+	#print(get_tree().root.get_children())
+	# pass # Replace with function body.
+	pass
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+
+func _pressed():
+	print(\"Hit the golf ball\")
+	
+	var currentScore = scoreLabel.is_ready()
+	
+	print(currentScore)
+	
+	scoreLabel.clear()
+	scoreLabel.append_text(\"test\")
+	
+	#var scoreLabel: RichTextLabel  = $RichTextLabel2
+	# @onready var scoreLabel: RichTextLabel = $RichTextLabel2
+	
+	#print(scoreLabel.get_class())
+	#print(text_value)  # Prints the plain text
+	
+	# Add to the score
+	#var currentScore = get_node(\"./RichTextLabel2\").get_parsed_text()
+	
+	#var newScore = currentScore + 1
+	
+	
+"
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 3.0
+offset_right = 1149.0
+offset_bottom = 647.0
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 948.0
+offset_top = 598.0
+offset_right = 1135.0
+offset_bottom = 629.0
+text = "Hit Ball"
+script = SubResource("GDScript_76uh8")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 1067.0
+offset_top = 560.0
+offset_right = 1122.0
+offset_bottom = 586.0
+text = "Score:"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 1120.0
+offset_top = 560.0
+offset_right = 1134.0
+offset_bottom = 586.0
+text = "0"
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 827.0
+offset_top = 598.0
+offset_right = 941.0
+offset_bottom = 629.0
+text = "Reset"

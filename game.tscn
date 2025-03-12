@@ -1,0 +1,111 @@
+[gd_scene load_steps=11 format=3 uid="uid://dilvkcqo7p35u"]
+
+[ext_resource type="Texture2D" uid="uid://dp4msvx10o43n" path="res://gxeyjtvo.png" id="1_ssdgw"]
+[ext_resource type="Script" path="res://OverlayControl.gd" id="2_bvine"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_5uv8w"]
+friction = 1.75
+rough = true
+absorbent = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nl1ym"]
+size = Vector3(1.23108, 0.444824, 3.00845)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_03kwl"]
+size = Vector2(12, 12)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e2uix"]
+albedo_color = Color(0.673125, 0.890885, 0.857847, 1)
+albedo_texture = ExtResource("1_ssdgw")
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xm0e4"]
+friction = 0.77
+rough = true
+bounce = 0.27
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1xrvi"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_q4yjo"]
+material = SubResource("StandardMaterial3D_1xrvi")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_mhapg"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Course" type="StaticBody3D" parent="."]
+transform = Transform3D(1.12989, 0, 0, 0, 1.12989, 0, 0, 0, 1.12989, 29.21, 0, 0)
+physics_material_override = SubResource("PhysicsMaterial_5uv8w")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Course"]
+transform = Transform3D(63.7831, 0, 0, 0, 1.00189, 0, 0, 0, 10.8513, -0.666, 0, 0.019)
+shape = SubResource("BoxShape3D_nl1ym")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Course"]
+transform = Transform3D(6.63175, 0, 0, 0, 1, 0, 0, 0, 2.98188, 0, 0, 0)
+mesh = SubResource("PlaneMesh_03kwl")
+surface_material_override/0 = SubResource("StandardMaterial3D_e2uix")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.115801, 0.828051, -0.548564, -0.17103, 0.560653, 0.810195, 0.978437, -7.61478e-09, 0.206546, -8.88521, 11.3315, 0.00733662)
+light_energy = 0.5
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 3.0
+offset_right = 1149.0
+offset_bottom = 647.0
+script = ExtResource("2_bvine")
+
+[node name="HitBallButton" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 948.0
+offset_top = 598.0
+offset_right = 1135.0
+offset_bottom = 629.0
+text = "Hit Ball"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control"]
+layout_mode = 0
+offset_left = 1067.0
+offset_top = 560.0
+offset_right = 1122.0
+offset_bottom = 586.0
+text = "Score:"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Control"]
+layout_mode = 0
+offset_left = 1120.0
+offset_top = 560.0
+offset_right = 1134.0
+offset_bottom = 586.0
+
+[node name="ResetButton" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 827.0
+offset_top = 598.0
+offset_right = 941.0
+offset_bottom = 629.0
+text = "Reset"
+
+[node name="GolfBall" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.002, 0.5, 0)
+physics_material_override = SubResource("PhysicsMaterial_xm0e4")
+continuous_cd = true
+max_contacts_reported = 10
+contact_monitor = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GolfBall"]
+mesh = SubResource("SphereMesh_q4yjo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GolfBall"]
+shape = SubResource("SphereShape3D_mhapg")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0.201078, -0.979575, 0, 0.979575, 0.201078, 1, 8.7894e-09, -4.28186e-08, -7.452, 4.029, 0)
+current = true
+fov = 67.4125
+
+[connection signal="body_entered" from="GolfBall" to="Control" method="_on_golf_ball_body_entered"]
+[connection signal="body_exited" from="GolfBall" to="Control" method="_on_golf_ball_body_exited"]
+[connection signal="sleeping_state_changed" from="GolfBall" to="Control" method="_on_golf_ball_sleeping_state_changed"]

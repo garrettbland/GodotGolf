@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://dymfg77h2s6fb"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nl1ym"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_03kwl"]
+size = Vector2(12, 12)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_55257"]
+friction = 0.77
+bounce = 2.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_8xykp"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_7qhec"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_nl1ym")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("PlaneMesh_03kwl")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+mass = 1.68
+physics_material_override = SubResource("PhysicsMaterial_55257")
+continuous_cd = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("SphereShape3D_8xykp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.77857, 0)
+mesh = SubResource("SphereMesh_7qhec")

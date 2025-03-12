@@ -1,0 +1,36 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5l1rfniru48m"]
+
+[ext_resource type="Script" path="res://PlayGolfButton.gd" id="1_khyvj"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 375.0
+offset_top = 249.0
+offset_right = 496.0
+offset_bottom = 282.0
+text = "Golf Game"
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 356.0
+offset_top = 291.0
+offset_right = 484.0
+offset_bottom = 323.0
+text = "Golf!"
+script = ExtResource("1_khyvj")
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 360.0
+offset_top = 339.0
+offset_right = 479.0
+offset_bottom = 374.0
+text = "Exit"
